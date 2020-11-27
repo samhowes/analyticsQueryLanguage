@@ -124,5 +124,8 @@
       }
     }
   },
-  "defaultProject": "analyticsQueryLanguage"
+  "defaultProject": "analyticsQueryLanguage",
+  "cli": {
+    "analytics": false
+  }
 }
