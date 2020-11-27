@@ -6,7 +6,7 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-import { EditorComponent } from 'ngx-monaco-editor';
+import * as monaco from 'monaco-editor-core';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +14,7 @@ import { EditorComponent } from 'ngx-monaco-editor';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements AfterViewInit {
+  @ViewChild('editorHost') editorHost: ElementRef<HTMLElement>;
   editor: monaco.editor.IStandaloneCodeEditor;
   title = 'analyticsQueryLanguage';
   json: any;
@@ -33,11 +34,12 @@ export class AppComponent implements AfterViewInit {
 
   constructor(private changeDetector: ChangeDetectorRef) {}
 
-  ngAfterViewInit() {}
-
-  onEditorInit(editor) {
-    this.editor = editor;
-    this.doStuff();
+  ngAfterViewInit() {
+    this.editor = monaco.editor.create(document.querySelector('.editor-host'), {
+      language: 'aql',
+      minimap: { enabled: false },
+      value: this.code,
+    });
   }
 
   doStuff() {
