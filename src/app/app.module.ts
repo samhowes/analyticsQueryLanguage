@@ -1,17 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppComponent } from './app.component';
-
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-
 import * as monaco from 'monaco-editor-core';
-export const languageID = 'aql';
-
-export const languageExtensionPoint: monaco.languages.ILanguageExtensionPoint = {
-  id: languageID,
-};
+import { language, languageExtensionPoint } from './lang/monach';
 
 export function setupLanguage() {
   (window as any).MonacoEnvironment = {
@@ -21,7 +14,12 @@ export function setupLanguage() {
   };
 
   monaco.languages.register(languageExtensionPoint);
-  monaco.languages.onLanguage(languageID, () => {});
+  monaco.languages.onLanguage(languageExtensionPoint.id, () => {
+    monaco.languages.setMonarchTokensProvider(
+      languageExtensionPoint.id,
+      language
+    );
+  });
 }
 setupLanguage();
 @NgModule({
