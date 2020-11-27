@@ -19,7 +19,7 @@ export class AppComponent implements AfterViewInit {
   json: any;
   editorOptions: monaco.editor.IStandaloneEditorConstructionOptions = {
     theme: 'vs',
-    language: 'javascript',
+    language: 'sql',
     contextmenu: false,
     scrollBeyondLastColumn: 0,
     scrollBeyondLastLine: false,
@@ -28,7 +28,8 @@ export class AppComponent implements AfterViewInit {
       enabled: false,
     },
   };
-  code: string = 'function x() {\nconsole.log("Hello world!");\n}';
+  code: string =
+    "SELECT WorkItemId, DateSK\nFROM WorkItemSnapshot\nWHERE AssignedTo = 'five'";
 
   constructor(private changeDetector: ChangeDetectorRef) {}
 
@@ -41,8 +42,16 @@ export class AppComponent implements AfterViewInit {
 
   doStuff() {
     this.json = {};
-    this.json.code = this.editor.getValue();
-    this.json.result = monaco.editor.tokenize(this.json.code, 'javascript');
+    this.json.code = this.editor.getModel().getValue();
+    const lines = monaco.editor.tokenize(this.code, 'sql');
+    const result = [];
+    let lineOffset = 0;
+    for (const line of lines) {
+      for (let i = 1; i < line.length; i++) {
+        result.push(this.code.slice(line[i - 1].offset, line[i].offset));
+      }
+    }
+    this.json.result = result;
     console.log('Result: ' + this.json);
     this.changeDetector.detectChanges();
   }
