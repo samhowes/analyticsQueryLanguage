@@ -4,5 +4,10 @@
     style="height: 100%"
     [options]="editorOptions"
     [(ngModel)]="code"
+    (onInit)="onEditorInit($event)"
   ></ngx-monaco-editor>
+</div>
+
+<div class="raw-output">
+  <pre>{{ json | json }}</pre>
 </div>
