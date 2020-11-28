@@ -11,31 +11,31 @@ const exportConfig = async (config: webpack.Configuration, options) => {
     chunks: 'all',
   };
 
-  // const rules = config.module.rules;
-  // config.module.rules = [
-  //   {
-  //     test: MONACO_REGEX,
-  //     rules: [
-  //       {
-  //         test: /\.css$/,
-  //         use: ['style-loader', 'css-loader'],
-  //       },
-  //       {
-  //         test: /\.ttf$/,
-  //         use: ['file-loader'],
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     exclude: MONACO_REGEX,
-  //     rules: rules,
-  //   },
-  // ];
+  const rules = config.module.rules;
+  config.module.rules = [
+    {
+      test: MONACO_REGEX,
+      rules: [
+        {
+          test: /\.css$/,
+          use: ['style-loader', 'css-loader'],
+        },
+        {
+          test: /\.ttf$/,
+          use: ['file-loader'],
+        },
+      ],
+    },
+    {
+      exclude: MONACO_REGEX,
+      rules: rules,
+    },
+  ];
 
-  // config.entry['editor.worker'] =
-  //   'monaco-editor-core/esm/vs/editor/editor.worker.js';
-  // config.entry['todoLangWorker'] = './src/app/lang/monaco/monaco.worker.ts';
-  // config.output.globalObject = 'self';
+  config.entry['editor.worker'] =
+    'monaco-editor-core/esm/vs/editor/editor.worker.js';
+  config.entry['todoLangWorker'] = './src/app/lang/monaco/monaco.worker.ts';
+  config.output.globalObject = 'self';
 
   return config;
 };
