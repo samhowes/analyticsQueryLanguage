@@ -8,7 +8,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "antlr4ts": "npx antlr4ts ./src/app/lang/antlr/TodoLangGrammar.g4 -o ./src/app/lang/antlr/gen"
+    "antlr4ts": "npx antlr4ts ./src/app/lang/antlr/AqlParser.g4 -lib ./src/app/lang/antlr/AqlLexer.g4 -o ./gen",
+    "antlr4tsTest": "./src/app/lang/test/build.sh"
   },
   "private": true,
   "dependencies": {

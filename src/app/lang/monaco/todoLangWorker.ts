@@ -1,6 +1,6 @@
 import * as worker from 'monaco-editor-core/esm/vs/editor/editor.worker';
 import { LanguageService } from '../language.service';
-import { ITodoLangError } from '../todoLang.errorlistener';
+import { IAntlrError } from '../todoLang.errorlistener';
 
 export class TodoLangWorker {
   private _ctx: worker.IWorkerContext;
@@ -10,7 +10,7 @@ export class TodoLangWorker {
     this.languageService = new LanguageService();
   }
 
-  doValidation(): Promise<ITodoLangError[]> {
+  doValidation(): Promise<IAntlrError[]> {
     const code = this.getTextDocument();
     return Promise.resolve(this.languageService.parse(code).errors);
   }

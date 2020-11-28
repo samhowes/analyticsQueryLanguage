@@ -1,11 +1,9 @@
 import { ANTLRInputStream, CharStreams, CommonTokenStream } from 'antlr4ts';
-import { TodoLangGrammarLexer } from './antlr/gen/TodoLangGrammarLexer';
+import { AqlLexer } from './antlr/gen/AqlLexer';
+import { AqlParser, Tsql_fileContext } from './antlr/gen/AqlParser';
+
 import {
-  TodoExpressionsContext,
-  TodoLangGrammarParser,
-} from './antlr/gen/TodoLangGrammarParser';
-import {
-  ITodoLangError,
+  IAntlrError,
   TodoLangErrorListener,
 } from './todoLang.errorlistener';
 
@@ -14,19 +12,19 @@ export class LanguageService {
 
   parse(
     code: string
-  ): { context: TodoExpressionsContext; errors: ITodoLangError[] } {
+  ): { context: Tsql_fileContext; errors: IAntlrError[] } {
     const inputStream = CharStreams.fromString(code);
-    const lexer = new TodoLangGrammarLexer(inputStream);
+    const lexer = new AqlLexer(inputStream);
     lexer.removeErrorListeners();
     const todoLangErrorsListner = new TodoLangErrorListener();
     lexer.addErrorListener(todoLangErrorsListner);
     const tokenStream = new CommonTokenStream(lexer);
-    const parser = new TodoLangGrammarParser(tokenStream);
+    const parser = new AqlParser(tokenStream);
     parser.removeErrorListeners();
     parser.addErrorListener(todoLangErrorsListner);
 
-    const ast = parser.todoExpressions();
-    const errors: ITodoLangError[] = todoLangErrorsListner.getErrors();
+    const ast = parser.tsql_file();
+    const errors: IAntlrError[] = todoLangErrorsListner.getErrors();
     return { context: ast, errors };
   }
 }

@@ -1,5 +1,5 @@
 import * as monaco from 'monaco-editor-core';
-import { ITodoLangError } from '../todoLang.errorlistener';
+import { IAntlrError } from '../todoLang.errorlistener';
 import { languageExtensionPoint } from './monach';
 import { WorkerManager } from './workerManager';
 
@@ -27,31 +27,21 @@ export default class DiagnosticsAdapter {
         return worker.doValidation();
       })
       .then(
-        (errors) => {
+        (errorMarkers) => {
           const model = monaco.editor.getModel(resource);
           monaco.editor.setModelMarkers(
             model,
             languageExtensionPoint.id,
-            errors.map(toDiagnostics)
+            errorMarkers.map(toDiagnostics)
           );
         },
         (reason) => {
           return console.log(reason);
         }
       );
-    // // call the validate methode proxy from the langaueg service and get errors
-    // const errorMarkers = await worker.doValidation();
-    // // get the current model(editor or file) which is only one
-    // const model = monaco.editor.getModel(resource);
-    // // add the error markers and underline them with severity of Error
-    // monaco.editor.setModelMarkers(
-    //   model,
-    //   languageExtensionPoint.id,
-    //   errorMarkers.map(toDiagnostics)
-    // );
   }
 }
-function toDiagnostics(error: ITodoLangError): monaco.editor.IMarkerData {
+function toDiagnostics(error: IAntlrError): monaco.editor.IMarkerData {
   return {
     ...error,
     severity: monaco.MarkerSeverity.Error,
