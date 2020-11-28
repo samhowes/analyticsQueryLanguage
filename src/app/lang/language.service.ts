@@ -1,4 +1,3 @@
-import { Injectable } from '@angular/core';
 import { ANTLRInputStream, CharStreams, CommonTokenStream } from 'antlr4ts';
 import { TodoLangGrammarLexer } from './antlr/gen/TodoLangGrammarLexer';
 import {

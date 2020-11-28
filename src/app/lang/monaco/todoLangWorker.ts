@@ -1,11 +1,11 @@
-import * as monaco from 'monaco-editor-core';
+import * as worker from 'monaco-editor-core/esm/vs/editor/editor.worker';
 import { LanguageService } from '../language.service';
 import { ITodoLangError } from '../todoLang.errorlistener';
 
 export class TodoLangWorker {
-  private _ctx: monaco.worker.IWorkerContext;
+  private _ctx: worker.IWorkerContext;
   private languageService: LanguageService;
-  constructor(ctx: monaco.worker.IWorkerContext) {
+  constructor(ctx: worker.IWorkerContext) {
     this._ctx = ctx;
     this.languageService = new LanguageService();
   }

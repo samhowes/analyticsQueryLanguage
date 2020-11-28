@@ -4,15 +4,17 @@ import { language, languageExtensionPoint, conf } from './monach';
 import { WorkerManager } from './workerManager';
 
 export function setupLanguage() {
-  (window as any).MonacoEnvironment = {
-    getWorkerUrl: function (moduleId, label) {
-      console.log(
-        `Received request for: ${moduleId}, ${label}. ExtensionPoint: ${languageExtensionPoint.id}`
-      );
-      if (label === languageExtensionPoint.id) return './todoLangWorker.js';
-      return './editor.worker.js';
-    },
+  const environment = {} as monaco.Environment;
+  environment.getWorker = (workerId: string, label: string) => {
+    if (label === languageExtensionPoint.id)
+      return new Worker('./monaco.worker', {
+        type: 'module',
+      });
+    return new Worker('monaco-editor-core/esm/vs/editor/editor.worker', {
+      type: 'module',
+    });
   };
+  (window as any).MonacoEnvironment = environment;
 
   monaco.languages.register(languageExtensionPoint);
   monaco.languages.onLanguage(languageExtensionPoint.id, () => {

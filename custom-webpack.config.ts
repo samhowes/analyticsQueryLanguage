@@ -32,9 +32,6 @@ const exportConfig = async (config: webpack.Configuration, options) => {
     },
   ];
 
-  config.entry['editor.worker'] =
-    'monaco-editor-core/esm/vs/editor/editor.worker.js';
-  config.entry['todoLangWorker'] = './src/app/lang/monaco/monaco.worker.ts';
   config.output.globalObject = 'self';
 
   return config;
