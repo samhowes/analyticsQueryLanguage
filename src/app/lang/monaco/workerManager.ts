@@ -38,15 +38,6 @@ export class WorkerManager {
     const promise = this.getClientproxy().then((_) =>
       this.worker.withSyncedResources(resources)
     );
-    const poll = interval(1000)
-      .pipe(
-        take(10),
-        tap((_) => {
-          // console.log(`Promise:`);
-          // console.log(promise);
-        })
-      )
-      .subscribe();
     return promise;
   }
 }

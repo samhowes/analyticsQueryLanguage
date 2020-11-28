@@ -1,7 +1,6 @@
 import * as monaco from 'monaco-editor-core';
 import { ITodoLangError } from '../todoLang.errorlistener';
 import { languageExtensionPoint } from './monach';
-import { WorkerAccessor } from './static';
 import { WorkerManager } from './workerManager';
 
 export default class DiagnosticsAdapter {

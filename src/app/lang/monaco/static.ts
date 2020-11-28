@@ -1,8 +1,6 @@
-export type WorkerAccessor = (...uris: monaco.Uri[]) => Promise<TodoLangWorker>;
 import * as monaco from 'monaco-editor-core';
 import DiagnosticsAdapter from './diagnostics.adapter';
 import { language, languageExtensionPoint, conf } from './monach';
-import { TodoLangWorker } from './todoLangWorker';
 import { WorkerManager } from './workerManager';
 
 export function setupLanguage() {
