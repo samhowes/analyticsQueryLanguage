@@ -7,6 +7,9 @@ import {
   ViewChild,
 } from '@angular/core';
 import * as monaco from 'monaco-editor-core';
+import { LanguageService } from './lang/language.service';
+import * as flatted from 'flatted';
+import * as Comlink from 'comlink';
 
 @Component({
   selector: 'app-root',
@@ -20,7 +23,7 @@ export class AppComponent implements AfterViewInit {
   json: any;
   editorOptions: monaco.editor.IStandaloneEditorConstructionOptions = {
     theme: 'vs',
-    language: 'sql',
+    language: 'aql',
     contextmenu: false,
     scrollBeyondLastColumn: 0,
     scrollBeyondLastLine: false,
@@ -40,20 +43,26 @@ export class AppComponent implements AfterViewInit {
       minimap: { enabled: false },
       value: this.code,
     });
+    this.doStuff();
   }
+  async extraStuff() {
+    console.log('test');
+    const worker = new Worker('./todoLangWorker.js');
+    worker.addEventListener('message', (msg) => {
+      return console.log(msg.data);
+    });
+    worker.addEventListener('error', (msg) => {
+      return console.log(msg);
+    });
 
+    console.log('done');
+  }
   doStuff() {
     this.json = {};
     this.json.code = this.editor.getModel().getValue();
-    const lines = monaco.editor.tokenize(this.code, 'sql');
-    const result = [];
-    let lineOffset = 0;
-    for (const line of lines) {
-      for (let i = 1; i < line.length; i++) {
-        result.push(this.code.slice(line[i - 1].offset, line[i].offset));
-      }
-    }
-    this.json.result = result;
+
+    // const flatt = flatted.stringify(ast, null, 2);
+    // this.json.ast = JSON.parse(flatt);
     console.log('Result: ' + this.json);
     this.changeDetector.detectChanges();
   }

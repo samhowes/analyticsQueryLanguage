@@ -1,8 +1,11 @@
 <button (click)="doStuff()">dostuff</button>
+<button (click)="extraStuff()">extraStuff</button>
 <div class="editor-container">
   <div #editorHost class="editor-host"></div>
 </div>
 
 <div class="raw-output">
-  <pre>{{ json | json }}</pre>
+  <ngx-json-viewer [json]="json"></ngx-json-viewer>
+  <!-- <pre>{{ json | json }}</pre> -->
+  <!-- <pre>{{ json?.ast }}</pre> -->
 </div>
