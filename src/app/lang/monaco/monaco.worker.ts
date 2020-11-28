@@ -4,7 +4,7 @@
 // import { TodoLangWorker } from './todoLangWorker';
 console.log('web worker running');
 
-postMessage(42);
+// postMessage(42);
 
 const value = 42;
 // class MyClass {
