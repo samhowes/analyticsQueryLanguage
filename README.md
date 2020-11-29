@@ -37,32 +37,37 @@ This project mostly overcomes the configuration hurldes of getting Monaco Editor
 1.  Monaco bundling
 
     1. Install Packages
-    1. `npm install monaco-editor-core`
-    1. `npm install -D @angular-builders/custom-webpack@^10`
 
-       > **IMPORTANT** At the time of writing, the commit upgrading `@angular-builders/custom-webpack` to Angular 11 has been [reverted](https://github.com/just-jeb/angular-builders/pull/878) and custom-webpack does **not** work with Angular 11.
+       1. `npm install monaco-editor-core`
+       1. `npm install -D @angular-builders/custom-webpack@^10`
 
-    1. `npm install -D style-loader css-loader`
+          > **IMPORTANT** At the time of writing, the commit upgrading `@angular-builders/custom-webpack` to Angular 11 has been [reverted](https://github.com/just-jeb/angular-builders/pull/878) and custom-webpack does **not** work with Angular 11.
 
-1.  [Configure angular to use custom-webpack](https://github.com/just-jeb/angular-builders/tree/master/packages/custom-webpack#usage)
-    1.  Configur primary build:
-        ```json
-          "projects": {
-          ...
-          "[project]": {
-            ...
-            "build": {
-            "builder": "@angular-builders/custom-webpack:browser",
-            "options": {
-              "customWebpackConfig": {
-                "path": "./custom-webpack.config.ts",
-                "mergeStrategies": {
-                  "externals": "replace"
-                }
-              },
-        ```
-    1.  Configre other targets to use primary build: find-replace `@angular-devkit/build-angular` for `@angular-builders/custom-webpack`
-    1.  Create [`custom-webpack.config.ts`](./custom-webpack.config.ts) in repository root with contents in this one.
+       1. `npm install -D style-loader css-loader`
+
+    1. [Configure angular to use custom-webpack](https://github.com/just-jeb/angular-builders/tree/master/packages/custom-webpack#usage)
+
+       1. Configur primary build:
+
+       ```json
+         "projects": {
+         ...
+         "[project]": {
+             ...
+             "build": {
+             "builder": "@angular-builders/custom-webpack:browser",
+             "options": {
+             "customWebpackConfig": {
+               "path": "./custom-webpack.config.ts",
+               "mergeStrategies": {
+                   "externals": "replace"
+               }
+             },
+       ```
+
+       1. Configre other targets to use primary build: find-replace `@angular-devkit/build-angular` for `@angular-builders/custom-webpack`
+       1. Create [`custom-webpack.config.ts`](./custom-webpack.config.ts) in repository root with contents in this one.
+
 1.  Configure Web Workers
     1. Get Angular to configure web workers for us: `ng generate web-worker app`
        1. Creates `tsconfig.worker.json`
