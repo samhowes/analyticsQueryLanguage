@@ -1,3 +1,4 @@
+// @ts-nocheck generated
 // https://github.com/antlr/grammars-v4/blob/master/sql/tsql/TSqlLexer.g4
 /*
 T-SQL (Transact-SQL, MSSQL) grammar.
@@ -148,7 +149,7 @@ SINGLE_QUOTE:       '\'';
 SQUARE_BRACKET_ID:  '[' (~']' | ']' ']')* ']';
 LOCAL_ID:           '@' ([A-Z_$@#0-9] | FullWidthLetter)*;
 DECIMAL:             DEC_DIGIT+;
-ID:                  ( [A-Z_#] | FullWidthLetter) ( [A-Z_#$@0-9] | FullWidthLetter )*;
+ID:                  ( [A-Za-z_#] | FullWidthLetter) ( [A-Za-z_#$@0-9] | FullWidthLetter )*;
 STRING:              'N'? '\'' (~'\'' | '\'\'')* '\'';
 BINARY:              '0' 'X' HEX_DIGIT*;
 FLOAT:               DEC_DOT_DEC;

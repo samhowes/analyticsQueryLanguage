@@ -1,3 +1,4 @@
+// @ts-nocheck generated
 // https://github.com/antlr/grammars-v4/blob/master/sql/tsql/TSqlParser.g4
 /*
 T-SQL (Transact-SQL, MSSQL) grammar.
