@@ -2,9 +2,10 @@
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "antlr4.generation": {
-    "mode": "internal",
-    "outputDir": "gen",
-    "language": "Typescript"
+    "mode": "external",
+    "outputDir": ".antlr",
+    "language": "Typescript",
+    "visitors": true
   },
   "antlr4.referencesCodeLens.enabled": true,
   "antlr4.format": {
