@@ -1,4 +1,36 @@
 {
   "editor.formatOnSave": true,
-  "editor.defaultFormatter": "esbenp.prettier-vscode"
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "antlr4.generation": {
+    "mode": "internal",
+    "outputDir": "gen",
+    "language": "Typescript"
+  },
+  "antlr4.referencesCodeLens.enabled": true,
+  "antlr4.format": {
+    "alignTrailingComments": false,
+    "allowShortBlocksOnASingleLine": true,
+    "breakBeforeBraces": false,
+    "continuationIndentWidth": 4,
+    "indentWidth": 2,
+    "keepEmptyLinesAtTheStartOfBlocks": false,
+    "maxEmptyLinesToKeep": 1,
+    "reflowComments": true,
+    "spaceBeforeAssignmentOperators": true,
+    "tabWidth": 4,
+    "useTab": false,
+    "alignColons": "none",
+    "singleLineOverrulesHangingColon": true,
+    "allowShortRulesOnASingleLine": true,
+    "alignSemicolons": "none",
+    "breakBeforeParens": false,
+    "ruleInternalsOnSingleLine": false,
+    "minEmptyLines": 0,
+    "groupedAlignments": true,
+    "alignFirstTokens": false,
+    "alignLexerCommands": false,
+    "alignActions": false,
+    "alignLabels": true,
+    "alignTrailers": false
+  }
 }

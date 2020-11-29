@@ -1,9 +1,11 @@
+import * as path from 'path';
 import * as webpack from 'webpack';
 
 const exportConfig = async (config: webpack.Configuration, options) => {
   const splitChunks = config.optimization
     .splitChunks as webpack.Options.SplitChunksOptions;
   const MONACO_REGEX = /[\\/]node_modules[\\/](monaco-editor-core)[\\/]/;
+  // const LANG_PATH = path.resolve(__dirname, 'src/app/lang');
   splitChunks.cacheGroups['monaco'] = {
     test: MONACO_REGEX,
     enforce: true,
@@ -26,8 +28,15 @@ const exportConfig = async (config: webpack.Configuration, options) => {
         },
       ],
     },
+    // {
+    //   include: LANG_PATH,
+    //   use: ['ts-loader'],
+    // },
     {
-      exclude: MONACO_REGEX,
+      exclude: [
+        MONACO_REGEX,
+        // LANG_PATH
+      ],
       rules: rules,
     },
   ];
